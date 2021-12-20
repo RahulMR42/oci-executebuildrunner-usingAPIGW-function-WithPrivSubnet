@@ -9,8 +9,8 @@ RUN  yum install -y git && \
 
 WORKDIR /function
 ADD requirements.txt .
-RUN python36 -m pip install --upgrade pip && \
-    python36 -m pip install -r requirements.txt
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install -r requirements.txt
 COPY func.py /function/
 ENV PYTHONPATH="$PYTHONPATH:/function"
 ENTRYPOINT ["fdk", "/function/func.py", "handler"]
