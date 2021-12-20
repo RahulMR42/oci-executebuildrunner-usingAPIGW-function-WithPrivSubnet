@@ -9,6 +9,7 @@ import os
 import json
 import logging
 from git import Repo
+import urllib.parse
 
 from fdk import response
 
@@ -16,9 +17,12 @@ class git_actions:
     def __init__(self):
         self.target_dir = '/tmp/source'
 
-    def git_clone(self,bb_user,bb_url,bb_slug,bb_branch,oci_ocr_target_repo,bb_commit_message):
+    def git_clone(self,bb_user,bb_url,bb_slug,bb_branch,oci_ocr_target_repo,oci_ocr_target_url,bb_commit_message):
         try:
-            Repo.clone_from(bb_url,self.target_dir)
+            repo = Repo.clone_from(bb_url,self.target_dir)
+            target_repo = repo.create_remote('target',url=oci_ocr_target_url)
+            target_repo.push(refspec='{}:{}'.format(bb_branch, bb_branch))
+
             
 
         except Exception as error:
@@ -33,15 +37,17 @@ def handler(ctx, data: io.BytesIO=None):
         bb_branch = body['push']['changes'][0]['new']['name']
         bb_slug = body['repository']['workspace']['slug']
         bb_commit_message = body['push']['changes'][0]['new']['target']['summary']['raw'].replace("\n", "")
-        oci_ocr_user = os.environ['oci_ocr_user']
+        oci_ocr_user = urllib.parse.quote(os.environ['oci_ocr_user'],safe="")
+        oci_ocr_password = urllib.parse.quote(os.environ['oci_ocr_password'],safe="")
         oci_region = os.environ['oci_region']
         oci_tenacy_namespace = os.environ['oci_tenacy_namespace']
         oci_ocr_project = os.environ['oci_ocr_project']
         oci_ocr_target_repo = f"https://devops.scmservice.${oci_region}.oci.oraclecloud.com/namespaces/{oci_tenacy_namespace}/projects/{oci_ocr_project}/repositories/{bb_repo_name}"
+        oci_ocr_target_url= f"https://${oci_ocr_user}:${oci_ocr_password}@devops.scmservice.{oci_region}.oci.oraclecloud.com/namespaces/{oci_tenacy_namespace}/projects/{oci_ocr_project}/repositories/{bb_repo_name}"
         
         logging.getLogger().info(f"User - {bb_user},Url - {bb_url},User - {bb_slug},Commit - {bb_commit_message},Oracle User - {oci_ocr_user},Target Repo - {oci_ocr_target_repo}")
         git_object = git_actions()
-        git_object.git_clone(bb_user,bb_url,bb_slug,bb_branch,oci_ocr_target_repo,bb_commit_message)
+        git_object.git_clone(bb_user,bb_url,bb_slug,bb_branch,oci_ocr_target_repo,oci_ocr_target_url,bb_commit_message)
 
         logging.getLogger().info("Invoked function with default  image")
         return response.Response(
