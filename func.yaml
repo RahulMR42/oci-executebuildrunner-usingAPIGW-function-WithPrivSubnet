@@ -7,8 +7,8 @@ run_image: fnproject/python:3.8
 entrypoint: /python/bin/fdk /function/func.py handler
 memory: 256
 config:
-  oci_ocr_user: Rahul
-  oci_ocr_password: test
+  oci_ocr_user: fahdabidiroottenancy/rahul
+  oci_ocr_password: 
   oci_ocr_project: mr-bb-test_wP9u_devops_project
   oci_region: us-phoenix-1
   oci_tenacy_namespace:  fahdabidiroottenancy

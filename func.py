@@ -22,8 +22,7 @@ class git_actions:
             repo = Repo.clone_from(bb_url,self.target_dir)
             target_repo = repo.create_remote('target',url=oci_ocr_target_url)
             target_repo.push(refspec='{}:{}'.format(bb_branch, bb_branch))
-
-            
+           
 
         except Exception as error:
             logging.getLogger().error('Exception' + str (error)) 
