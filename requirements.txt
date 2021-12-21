@@ -1,3 +1,7 @@
 fdk
 requests
 gitpython
+uuid
+oci
+oci-cli
+

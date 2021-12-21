@@ -1,2 +1,3 @@
 to do ...
 ====
+https://www.ateam-oracle.com/post/using-the-oci-instance-principals-and-vault-with-python-to-retrieve-a-secret
