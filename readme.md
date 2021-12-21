@@ -58,6 +58,7 @@ resource.compartment.id = 'ocid1.compartment.oc1..xx'
 
 - Build the functions with the custom code.
 - Update func.yaml the OCID of secrets oci_ocr_user_id & oci_ocr_password_id .
+- Update the func.yaml with your devops project /tenacy 
 
 ```
 $ cd oci-apigateway-function-webhook 
