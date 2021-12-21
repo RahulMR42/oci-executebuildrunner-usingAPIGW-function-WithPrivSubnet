@@ -1,5 +1,5 @@
 schema_version: 20180708
-name: fndefaulthelloworld
+name: bbwebhookfunction
 version: 0.0.53
 runtime: docker
 build_image: fnproject/python:3.8-dev
@@ -7,8 +7,8 @@ run_image: fnproject/python:3.8
 entrypoint: /python/bin/fdk /function/func.py handler
 memory: 256
 config:
-  oci_ocr_password_id: ocid1.vaultsecret.oc1.phx.amaaaaaak56z2vqazxqfu6zjcocoq4yw7zxqntc5j3f2tchds5l4kzvf6kcq
-  oci_ocr_project: mr-bb-test_wP9u_devops_project
-  oci_ocr_user_id: ocid1.vaultsecret.oc1.phx.amaaaaaak56z2vqaz2xcsuvno5dsjie54fypd43d34ofutvn2yrlsup4yxkq
-  oci_region: us-phoenix-1
-  oci_tenacy_namespace: fahdabidiroottenancy
+  oci_ocr_password_id: <OCI Secrets OCID of your OCI Code repo  password)
+  oci_ocr_project: <Devops project name>
+  oci_ocr_user_id: <OCI Secrets OCID of your OCI Code repo user)
+  oci_region: <Your OCI region>
+  oci_tenacy_namespace: <Tenancy name>
