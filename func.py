@@ -57,6 +57,9 @@ class git_actions:
 def handler(ctx, data: io.BytesIO=None):
     try:
         body = json.loads(data.getvalue())
+        if body['test']:
+            logging.getLogger().info(f"Its a test {str(body)}")
+            raise Exception 
         bb_user = body['actor']['display_name'].replace(" ", "")
         bb_url = body['push']['changes'][0]['new']['links']['html']['href']
         bb_repo_name = bb_url.split("/")[-3]
