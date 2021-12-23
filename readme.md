@@ -157,6 +157,8 @@ Allow dynamic-group <dg-api-gateway> to use functions-family in compartment <com
 
 ![](images/priv_vcn_sl_ingress.png)
 
+- You can mention the exact segment that you want to allow to access the Gateway too (instead of 0.0.0.0).
+
 
 📗 OCI DEVOPS CODE Repo
 
