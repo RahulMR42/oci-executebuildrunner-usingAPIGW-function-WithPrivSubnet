@@ -149,6 +149,18 @@ ALL {resource.type = 'ApiGateway', resource.compartment.id = 'ocid1.compartment.
 Allow dynamic-group <dg-api-gateway> to use functions-family in compartment <compartment name>
 ```
 
+- Create an OCI Service gateway ,add a routelist and allow all the OCI services (This to use the private IP to fetch data from and in to OCI Code repo)
+
+    - https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/servicegateway.htm 
+
+    - The service gateway and the routing list must be under the same VCN that you will be hosting the private code repo (bitbucket,github etc) and the OCI function application.
+
+![](images/ocisg1.png)
+
+- Add a specific routing table with in the VCN.
+
+![](images/ocisg2.png)
+
 📗 Update VCN to allow the gateway access 
 
 ---------
